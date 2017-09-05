@@ -5,6 +5,7 @@
  */
 package chatbotclient;
 
+import controler.ControlerClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,10 +20,10 @@ import java.util.logging.Logger;
  */
 public class ChatBotClient implements Runnable{
 
-    static Socket communicationSocket;
-    static BufferedReader console;
-    static BufferedReader inputStream;
-    static PrintStream outputStream;
+    public static Socket communicationSocket;
+    public static BufferedReader console;
+    public static BufferedReader inputStream;
+    public static PrintStream outputStream;
     
     public static void main(String[] args) {
         try {
@@ -41,6 +42,12 @@ public class ChatBotClient implements Runnable{
             
             outputStream.println("hello");
             while(true){
+                try {
+                    String log = ControlerClient.prijavljivanjeIRegistracija();
+                    outputStream.println(log);
+                } catch (Exception ex) {
+                    Logger.getLogger(ChatBotClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 outputStream.println(console.readLine());
             }
             
