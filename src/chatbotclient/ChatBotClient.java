@@ -38,22 +38,26 @@ public class ChatBotClient implements Runnable{
             outputStream = new PrintStream(
                                 communicationSocket.getOutputStream());
             
-            new Thread(new ChatBotClient()).start();
+           // new Thread(new ChatBotClient()).start();
             
             outputStream.println("hello");
-            while(true){
+            boolean signal = false;
+            while(!signal){
                 try {
-                    String log = ControlerClient.prijavljivanjeIRegistracija();
-                    outputStream.println(log);
+                    signal = ControlerClient.prijavljivanjeIRegistracija();
+                   // outputStream.println(log);
                 } catch (Exception ex) {
                     Logger.getLogger(ChatBotClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                outputStream.println(console.readLine());
+                //inputStream.readLine();
+                System.out.println(inputStream.readLine());
+                //outputStream.println(console.readLine());
             }
             
         } catch (IOException ex) {
             Logger.getLogger(ChatBotClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+        new Thread(new ChatBotClient()).start();
     }
 
     @Override
