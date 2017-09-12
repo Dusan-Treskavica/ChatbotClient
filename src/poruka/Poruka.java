@@ -5,6 +5,7 @@
  */
 package poruka;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import util.TipPoruke;
 
@@ -12,14 +13,24 @@ import util.TipPoruke;
  *
  * @author DusanT
  */
-public class Poruka {
+public class Poruka implements Serializable{
     private String posiljalac;
     private LinkedList<String> primaoci;
     private TipPoruke tipPoruke;
-    
+    private String tekstPoruke;
+
     public Poruka(){        
     }
 
+   
+    
+    public Poruka(String posiljalac, LinkedList<String> primaoci, TipPoruke tipPoruke, String tekstPoruke) {
+        this.posiljalac = posiljalac;
+        this.primaoci = primaoci;
+        this.tipPoruke = tipPoruke;
+        this.tekstPoruke = tekstPoruke;
+    }
+    
     public Poruka(String posiljalac, LinkedList<String> primaoci, TipPoruke tipPoruke) {
         this.posiljalac = posiljalac;
         this.primaoci = primaoci;
@@ -48,6 +59,14 @@ public class Poruka {
 
     public void setTipPoruke(TipPoruke tipPoruke) {
         this.tipPoruke = tipPoruke;
+    }
+    
+     public String getTekstPoruke() {
+        return tekstPoruke;
+    }
+
+    public void setTekstPoruke(String tekstPoruke) {
+        this.tekstPoruke = tekstPoruke;
     }
     
     

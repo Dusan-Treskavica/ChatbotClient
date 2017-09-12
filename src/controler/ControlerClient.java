@@ -6,7 +6,9 @@
 package controler;
 
 import chatbotclient.ChatBotClient;
+import chatbotclient.chatgroup.ChatGroup;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -15,9 +17,9 @@ import java.util.Scanner;
  */
 public class ControlerClient {
     
-    //public static ChatBotClient aktivniKlijent;
     
-    public static boolean prijavljivanjeIRegistracija() throws Exception{
+    
+    public static synchronized boolean prijavljivanjeIRegistracija() throws Exception{
         boolean signal = false;
         System.out.println("Do you have account?(yes/no)");
         String s = new Scanner(System.in).nextLine();
@@ -33,8 +35,9 @@ public class ControlerClient {
             if(s.equalsIgnoreCase("no")){
                 ChatBotClient.outputStream.println("signup");
                 while(!signal){
-                signal = registracija1();
-            }
+                    signal = registracija1();
+                    
+                }
 //                ChatBotClient.outputStream.println("signup");
 //                return registracija();
             }                
@@ -44,7 +47,7 @@ public class ControlerClient {
         return signal;        
     }
     
-    private static boolean prijavljivanje1() throws IOException, Exception {
+    private static synchronized boolean prijavljivanje1() throws IOException, Exception {
         //ChatBotClient.outputStream.println("signin");
         
         System.out.println("Unesi sledece podatke u zadatom formatu.");
@@ -63,7 +66,7 @@ public class ControlerClient {
         throw new Exception("Greska");
     }
 
-    private static boolean registracija1() throws IOException, Exception {
+    private static synchronized boolean registracija1() throws IOException, Exception {
         //ChatBotClient.outputStream.println("signup");
         
          System.out.println("Unesi sledece podatke u zadatom formatu.");
@@ -81,15 +84,15 @@ public class ControlerClient {
             
         throw new Exception("Greska");
     }
-    private static String registracija() {
-        System.out.println("Unesi sledece podatke u zadatom formatu.");
-        System.out.println("ime:prezime:datumrodjenja:pol:drzava:username:password");
-        return new Scanner(System.in).nextLine();
-    }
-
-    private static String prijavljivanje() {
-        System.out.println("Unesi sledece podatke u zadatom formatu.");
-        System.out.println("username:password");
-        return new Scanner(System.in).nextLine();
-    }
+//    private static String registracija() {
+//        System.out.println("Unesi sledece podatke u zadatom formatu.");
+//        System.out.println("ime:prezime:datumrodjenja:pol:drzava:username:password");
+//        return new Scanner(System.in).nextLine();
+//    }
+//
+//    private static String prijavljivanje() {
+//        System.out.println("Unesi sledece podatke u zadatom formatu.");
+//        System.out.println("username:password");
+//        return new Scanner(System.in).nextLine();
+//    }
 }

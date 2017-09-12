@@ -24,6 +24,7 @@ public class ChatBotClient implements Runnable{
     public static BufferedReader console;
     public static BufferedReader inputStream;
     public static PrintStream outputStream;
+    public static int chatGroupNumber = 0;
     
     public static void main(String[] args) {
         try {
@@ -40,7 +41,9 @@ public class ChatBotClient implements Runnable{
             
            // new Thread(new ChatBotClient()).start();
             
-            outputStream.println("hello");
+           // outputStream.println("hello");
+           
+           //PRIJAVLJIVANJE I REGISTRACIJA
             boolean signal = false;
             while(!signal){
                 try {
@@ -54,10 +57,45 @@ public class ChatBotClient implements Runnable{
                 //outputStream.println(console.readLine());
             }
             
+            new Thread(new ChatBotClient()).start();
+            
+            boolean kraj = false;
+            while(!kraj){
+                izborAktivnosti();
+            }
+            
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(ChatBotClient.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+
+    private static void izborAktivnosti() throws IOException {
+        System.out.println("Izaberite aktivnost:");
+        System.out.println("1. Kreiraj chatgrupu");
+        System.out.println("2. Izaberi chatgrupu");
+        System.out.println("3. Posalji poruku botu");
+        System.out.println("4. Osvezi listu aktivnih klijenata");
+        System.out.println("5. Odjavi se");
+        
+        String izbor = console.readLine();
+        
+        switch(izbor){
+            case "1":
+                //kreirajChatGrupu();
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                break;
+            case "5":
+                break;
+            default:
+                break;
         }
-        new Thread(new ChatBotClient()).start();
     }
 
     @Override
